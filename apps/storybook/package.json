@@ -1,5 +1,5 @@
 {
-  "name": "@theblairwitch/arcana-storybook",
+  "name": "@blairwitch/arcana-storybook",
   "private": true,
   "version": "0.0.20",
   "type": "module",
@@ -14,7 +14,7 @@
     "chromatic": "npx chromatic --project-token=chpt_e15887c7508040f --exit-zero-on-changes"
   },
   "dependencies": {
-    "@theblairwitch/arcana-ui": "workspace:*",
+    "@blairwitch/arcana-ui": "workspace:*",
     "dotenv": "^16.4.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"

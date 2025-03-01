@@ -1,5 +1,5 @@
 {
-  "name": "@theblairwitch/arcana-icons",
+  "name": "@blairwitch/arcana-icons",
   "version": "0.0.0",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -35,6 +35,6 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public",
-    "scope": "@theblairwitch"
+    "scope": "@blairwitch"
   }
 }
