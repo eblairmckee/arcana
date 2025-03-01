@@ -1,4 +1,4 @@
-import { tailwindConfig } from "@theblairwitch/arcana-ui";
+import { tailwindConfig } from "@blairwitch/arcana-ui";
 import type { Config } from "tailwindcss";
 
 export default {

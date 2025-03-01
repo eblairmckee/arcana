@@ -37,24 +37,24 @@ const config: StorybookConfig = {
         dedupe: ["react", "react-dom"],
         alias: [
           {
-            find: "@theblairwitch/arcana-ui",
+            find: "@blairwitch/arcana-ui",
             replacement: resolve(__dirname, "../../../packages/ui/src")
           },
           {
-            find: "@theblairwitch/arcana-icons",
+            find: "@blairwitch/arcana-icons",
             replacement: resolve(__dirname, "../../../packages/icons/src")
           }
         ]
       },
       optimizeDeps: {
         include: ["react", "react-dom"],
-        exclude: ["@theblairwitch/arcana-ui", "@theblairwitch/arcana-icons"],
+        exclude: ["@blairwitch/arcana-ui", "@blairwitch/arcana-icons"],
         force: true,
         entries: ["../../packages/*/src/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"]
       },
       server: {
         watch: {
-          ignored: ["!**/node_modules/@theblairwitch/**"]
+          ignored: ["!**/node_modules/@blairwitch/**"]
         }
       }
     });

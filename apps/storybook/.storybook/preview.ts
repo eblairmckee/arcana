@@ -1,7 +1,7 @@
+import "@blairwitch/arcana-ui/styles/styles.css";
 import { withThemeByDataAttribute } from "@storybook/addon-themes";
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 import type { Preview } from "@storybook/react";
-import "@theblairwitch/arcana-ui/styles/styles.css";
 import "../src/index.css";
 
 const CUSTOM_VIEWPORTS = {

@@ -20,9 +20,9 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
-      "@theblairwitch/arcana-ui": ["../../packages/ui/src"],
-      "@theblairwitch/arcana-ui/*": ["../../packages/ui/src/*"],
-      "@theblairwitch/arcana-*": ["../../packages/*"]
+      "@blairwitch/arcana-ui": ["../../packages/ui/src"],
+      "@blairwitch/arcana-ui/*": ["../../packages/ui/src/*"],
+      "@blairwitch/arcana-*": ["../../packages/*"]
     }
   },
   "include": ["src", "../../packages/ui/src/**/*"]

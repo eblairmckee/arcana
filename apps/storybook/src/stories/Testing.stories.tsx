@@ -1,5 +1,5 @@
+import { Testing, type TestingProps } from "@blairwitch/arcana-ui";
 import type { Meta, StoryObj } from "@storybook/react";
-import { Testing, type TestingProps } from "@theblairwitch/arcana-ui";
 
 const meta: Meta<TestingProps> = {
   title: "Components/Testing",

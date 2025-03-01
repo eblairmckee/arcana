@@ -1,11 +1,11 @@
-# how to consume `@theblairwitch/arcana-ui`
+# how to consume `@blairwitch/arcana-ui`
 
-Install `@theblairwitch/arcana-ui` via npm, yarn, or bun package managers. Since this is a privately scoped package, you'll need to be added to the `@theblairwitch` organization on npm, and run `npm login` with your npm credentials.
+Install `@blairwitch/arcana-ui` via npm, yarn, or bun package managers. Since this is a privately scoped package, you'll need to be added to the `@blairwitch` organization on npm, and run `npm login` with your npm credentials.
 
-Note: you'll need to have both `react` and `react-dom` installed in your project to use `@theblairwitch/arcana-ui` as they are peer dependencies. No other dependencies are required.
+Note: you'll need to have both `react` and `react-dom` installed in your project to use `@blairwitch/arcana-ui` as they are peer dependencies. No other dependencies are required.
 
 ```bash
-bun add @theblairwitch/arcana-ui
+bun add @blairwitch/arcana-ui
 ```
 
 ## styles & fonts
@@ -17,26 +17,26 @@ import type { Metadata } from "next";
 import "./globals.css";
 import "arcana/ui/styles/styles.css";
 import localFont from "next/font/local";
-import { ToastProvider } from "@theblairwitch/arcana-ui";
+import { ToastProvider } from "@blairwitch/arcana-ui";
 const gilroy = localFont({
   src: [
     {
-      path: "../../node_modules/@theblairwitch/arcana-ui/dist/fonts/Gilroy-Light.ttf",
+      path: "../../node_modules/@blairwitch/arcana-ui/dist/fonts/Gilroy-Light.ttf",
       weight: "400",
       style: "normal"
     },
     {
-      path: "../../node_modules/@theblairwitch/arcana-ui/dist/fonts/Gilroy-Regular.ttf",
+      path: "../../node_modules/@blairwitch/arcana-ui/dist/fonts/Gilroy-Regular.ttf",
       weight: "500",
       style: "normal"
     },
     {
-      path: "../../node_modules/@theblairwitch/arcana-ui/dist/fonts/Gilroy-Medium.ttf",
+      path: "../../node_modules/@blairwitch/arcana-ui/dist/fonts/Gilroy-Medium.ttf",
       weight: "600",
       style: "normal"
     },
     {
-      path: "../../node_modules/@theblairwitch/arcana-ui/dist/fonts/Gilroy-Bold.ttf",
+      path: "../../node_modules/@blairwitch/arcana-ui/dist/fonts/Gilroy-Bold.ttf",
       weight: "700",
       style: "normal"
     }
@@ -67,12 +67,12 @@ and update your `tailwind.config.ts` to include the font variable and extend the
 
 ```ts
 import type { Config } from "tailwindcss";
-import { tailwindConfig } from "@theblairwitch/arcana-ui";
+import { tailwindConfig } from "@blairwitch/arcana-ui";
 
 export default {
   content: [
     "./src/**/*.{ts,tsx}",
-    "./node_modules/@theblairwitch/arcana-ui/dist/**/*.{js,mjs}"
+    "./node_modules/@blairwitch/arcana-ui/dist/**/*.{js,mjs}"
   ],
   presets: [tailwindConfig],
   theme: {
@@ -95,11 +95,13 @@ To use `arcana/ui` with typescript, you'll need to add the following to your `ts
 {
   "compilerOptions": {
     "paths": {
-      "@theblairwitch/arcana-ui": ["./node_modules/@theblairwitch/arcana-ui/dist/index.d.ts"],
-      "@theblairwitch/arcana-ui/*": ["./node_modules/@theblairwitch/arcana-ui/dist/*"]
+      "@blairwitch/arcana-ui": [
+        "./node_modules/@blairwitch/arcana-ui/dist/index.d.ts"
+      ],
+      "@blairwitch/arcana-ui/*": ["./node_modules/@blairwitch/arcana-ui/dist/*"]
     }
   },
-  "include": ["node_modules/@theblairwitch/arcana-ui/dist/**/*.d.ts"]
+  "include": ["node_modules/@blairwitch/arcana-ui/dist/**/*.d.ts"]
 }
 ```
 
@@ -111,20 +113,20 @@ Update your `next.config.ts` to automatically transpile the `arcana/ui` package.
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  transpilePackages: ["@theblairwitch/arcana-ui", "@theblairwitch/arcana-icons"]
+  transpilePackages: ["@blairwitch/arcana-ui", "@blairwitch/arcana-icons"]
 };
 
 export default nextConfig;
 ```
 
-`@theblairwitch/arcana-icons` is a direct dependency of `@theblairwitch/arcana-ui`, so no additional configuration is needed to use it in your project.
+`@blairwitch/arcana-icons` is a direct dependency of `@blairwitch/arcana-ui`, so no additional configuration is needed to use it in your project.
 
 ## using components
 
-next will handle all the tree shaking for you, so just import components from `@theblairwitch/arcana-ui` directly.
+next will handle all the tree shaking for you, so just import components from `@blairwitch/arcana-ui` directly.
 
 ```ts
-import { Button } from "@theblairwitch/arcana-ui";
+import { Button } from "@blairwitch/arcana-ui";
 ```
 
 ### Server Components Compatibility
@@ -138,5 +140,5 @@ Example usage in a Client Component:
 ```tsx
 "use client";
 
-import { Tabs } from "@theblairwitch/arcana-ui";
+import { Tabs } from "@blairwitch/arcana-ui";
 ```
