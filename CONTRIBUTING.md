@@ -69,7 +69,7 @@ Alternatively, you can run `bun run changeset version` and `bun run changeset pu
 
 Note: changes will not be published unless you've generated changesets for your changes.
 
-Packages are deployed to [npm](https://www.npmjs.com/settings/theblairwitch/packages).
+Packages are deployed to [npm](https://www.npmjs.com/settings/blairwitch/packages).
 
 ## Development
 
