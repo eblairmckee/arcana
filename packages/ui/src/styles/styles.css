@@ -1,0 +1,200 @@
+@import "./fonts.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  font-family: "Gilroy", sans-serif;
+}
+
+:root,
+[data-color-scheme="light"] {
+  /* Base Font */
+  font-family: "Gilroy", sans-serif;
+  --icon-stroke: #080808;
+
+  /* Colors */
+  /* Background */
+  --color-background-0: #ffffff;
+  --color-background-50: #f6f6f6;
+  --color-background-100: #f7f7f5;
+
+  /* Primary */
+  --color-primary-50: #5b3de3;
+  --color-primary-100: #089ccb;
+  --color-primary: #080808;
+
+  /* Secondary */
+  --color-secondary-50: #d9d9d9;
+  --color-secondary-100: #f6f5ff;
+  --color-secondary-200: #ebe8fc;
+  --color-secondary-300: #bdaeff;
+  --color-secondary-400: #e7f7fc;
+  --color-secondary-500: #daf6ff;
+  --color-secondary-600: #b3edff;
+  --color-secondary: #666666;
+
+  /* Tertiary */
+  --color-tertiary-5: #e33d6550;
+  --color-tertiary-10: #e33d65;
+  --color-tertiary-15: #f59e0b50;
+  --color-tertiary-20: #f59e0b;
+  --color-tertiary-25: #10b98150;
+  --color-tertiary-30: #10b981;
+
+  /* Other Colors */
+  --color-stroke: #ececec;
+  --color-white: #ffffff;
+  --color-primary-blue: #089ccb;
+  --color-disabled: #888888;
+  --color-danger: #e33d65;
+  --color-overlay: rgba(26, 26, 28, 0.8);
+  --color-sidebar-overlay: rgba(0, 0, 0, 0.6);
+  --color-border: #ececec;
+
+  /* Typography */
+  /* Heading */
+  --font-heading-xl-size: 56px;
+  --font-heading-xl-spacing: -1.12px;
+  --font-heading-xl-weight: 700;
+
+  --font-heading-lg-size: 32px;
+  --font-heading-lg-spacing: -0.64px;
+  --font-heading-lg-weight: 700;
+
+  --font-heading-md-size: 32px;
+  --font-heading-md-spacing: -0.64px;
+  --font-heading-md-weight: 700;
+
+  --font-heading-sm-size: 24px;
+  --font-heading-sm-spacing: -0.48px;
+  --font-heading-sm-weight: 700;
+
+  --font-heading-xs-size: 20px;
+  --font-heading-xs-spacing: 0.4px;
+  --font-heading-xs-weight: 700;
+
+  /* Body */
+  --font-body-lg-size: 20px;
+  --font-body-lg-spacing: -0.4px;
+  --font-body-lg-weight: 500;
+  --font-body-lg-line-height: 150%;
+
+  --font-body-lg-semibold-size: 20px;
+  --font-body-lg-semibold-spacing: -0.4px;
+  --font-body-lg-semibold-weight: 600;
+  --font-body-lg-semibold-line-height: 150%;
+
+  --font-body-md-size: 18px;
+  --font-body-md-spacing: 0.36px;
+  --font-body-md-weight: 600;
+
+  --font-body-default-size: 16px;
+  --font-body-default-spacing: 0;
+  --font-body-default-weight: 400;
+  --font-body-default-line-height: 150%;
+
+  --font-body-default-medium-size: 16px;
+  --font-body-default-medium-spacing: 0;
+  --font-body-default-medium-weight: 500;
+
+  --font-body-default-semibold-size: 16px;
+  --font-body-default-semibold-spacing: 0;
+  --font-body-default-semibold-weight: 600;
+
+  --font-body-default-bold-size: 16px;
+  --font-body-default-bold-spacing: 0;
+  --font-body-default-bold-weight: 700;
+
+  --font-body-xs-size: 14px;
+  --font-body-xs-spacing: 0;
+  --font-body-xs-weight: 400;
+
+  --font-body-xs-medium-size: 14px;
+  --font-body-xs-medium-spacing: 0;
+  --font-body-xs-medium-weight: 500;
+
+  --font-body-xs-bold-size: 14px;
+  --font-body-xs-bold-spacing: 0;
+  --font-body-xs-bold-weight: 700;
+
+  --font-body-xxs-size: 13px;
+  --font-body-xxs-spacing: 0;
+  --font-body-xxs-weight: 400;
+
+  --font-body-xxs-medium-size: 13px;
+  --font-body-xxs-medium-spacing: 0;
+  --font-body-xxs-medium-weight: 500;
+
+  --font-body-xxs-semibold-size: 13px;
+  --font-body-xxs-semibold-spacing: 0;
+  --font-body-xxs-semibold-weight: 600;
+
+  --font-body-xxs-bold-size: 13px;
+  --font-body-xxs-bold-spacing: 0;
+  --font-body-xxs-bold-weight: 700;
+
+  /* Label */
+  --font-label-default-size: 13px;
+  --font-label-default-line-height: 24px;
+  --font-label-default-spacing: 0;
+  --font-label-default-weight: 400;
+}
+
+[data-color-scheme="dark"] {
+  /* Background */
+  --color-background-0: #121212;
+  --color-background-50: #1e1e1e;
+  --color-background-100: #242424;
+
+  /* Primary - Keeping primary-50 and primary-100 vibrant for CTAs */
+  --color-primary-50: #7b5df3; /* Slightly lighter purple for dark mode */
+  --color-primary-100: #0ab3e8; /* Brighter blue for dark mode */
+  --color-primary: #ffffff; /* Primary text becomes white */
+
+  /* Secondary - Softer grays for dark mode */
+  --color-secondary-50: #2d2d2d;
+  --color-secondary-100: #1a1a2e;
+  --color-secondary-200: #252538;
+  --color-secondary-300: #6b5eb8;
+  --color-secondary-400: #1a2830;
+  --color-secondary-500: #1c2f36;
+  --color-secondary-600: #1a3842;
+  --color-secondary: #a0a0a0; /* Secondary text becomes lighter */
+
+  /* Tertiary - Keeping error/warning/success colors vibrant but slightly muted */
+  --color-tertiary-5: #e33d6530;
+  --color-tertiary-10: #ff4d75;
+  --color-tertiary-15: #f59e0b30;
+  --color-tertiary-20: #fbbf24;
+  --color-tertiary-25: #10b98130;
+  --color-tertiary-30: #34d399;
+
+  /* Other Colors */
+  --color-stroke: #2d2d2d;
+  --color-white: #ffffff;
+  --color-primary-blue: #7b5df3;
+  --color-disabled: #666666;
+  --color-danger: #ff4d75;
+  --color-overlay: rgba(0, 0, 0, 0.8);
+  --color-sidebar-overlay: rgba(0, 0, 0, 0.75);
+  --color-border: #2d2d2d;
+
+  /* Icon stroke color for dark mode */
+  --icon-stroke: #ffffff;
+}
+
+* {
+  font-family: "Gilroy", sans-serif;
+}
+
+.radix-themes {
+  --default-font-family: "Gilroy", sans-serif;
+}
+
+@layer base {
+  .radix-tooltip-content {
+    transform-origin: var(--radix-tooltip-content-transform-origin);
+    animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}

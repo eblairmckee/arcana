@@ -1,0 +1,134 @@
+name: PR Checks
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch: # Allows manual triggering
+  push:
+    branches: [main] # Also run on direct pushes to main
+
+# Add permissions needed for private repos
+permissions:
+  contents: read
+  pull-requests: write # Needed to comment on PRs
+  actions: write # Needed for cache operations
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }} # Needed for private repo access
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+      - name: Setup npm auth
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+      - name: Install Dependencies
+        run: bun install
+      - name: Cache Dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            packages/*/node_modules
+            apps/*/node_modules
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/bun.lockb') }}
+
+  lint-and-format:
+    needs: setup
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+      - name: Setup npm auth
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+      - name: Install Dependencies
+        run: bun install
+      - name: Run Linting
+        run: bun run lint
+# bun run format not functioning correctly
+#      - name: Check Formatting
+#        run: bun run format:check
+
+  build-icons:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+      - name: Setup npm auth
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+      - name: Install Dependencies
+        run: bun install
+      - name: Build Icons
+        run: bun run build:icons
+      - name: Upload Icons Build
+        uses: actions/upload-artifact@v4
+        with:
+          name: icons-dist
+          path: packages/icons/dist
+
+  build-ui:
+    needs: [setup, build-icons]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+      - name: Setup npm auth
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+      - name: Install Dependencies
+        run: bun install
+      - name: Download Icons Build
+        uses: actions/download-artifact@v4
+        with:
+          name: icons-dist
+          path: packages/icons/dist
+      - name: Build ui
+        run: bun run build:ui
+
+  build-storybook:
+    needs: [setup, build-icons, build-ui]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+      - name: Setup npm auth
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+      - name: Install Dependencies
+        run: bun install
+      - name: Download Icons Build
+        uses: actions/download-artifact@v4
+        with:
+          name: icons-dist
+          path: packages/icons/dist
+      - name: Build Storybook
+        run: bun run build:storybook

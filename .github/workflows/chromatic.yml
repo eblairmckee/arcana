@@ -1,0 +1,73 @@
+name: Chromatic
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "packages/ui/**"
+      - "apps/storybook/**"
+  workflow_dispatch: # Allow manual triggers for testing
+
+jobs:
+  chromatic:
+    name: Deploy Storybook to Chromatic
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+
+      - name: Install Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install Dependencies
+        run: bun install
+        working-directory: .
+
+      - name: Build and Pack Packages
+        run: |
+          echo "Building packages..."
+          bun run build:icons
+          bun run build:ui
+        working-directory: .
+
+      - name: Build Storybook
+        run: bun run build-storybook
+        working-directory: apps/storybook
+
+      # For local testing, use direct command instead of action
+      - name: Publish to Chromatic (Local)
+        if: ${{ env.ACT }}
+        env:
+          CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+        working-directory: apps/storybook
+        run: bunx chromatic --project-token=${CHROMATIC_PROJECT_TOKEN} --exit-zero-on-changes --build-script-name=build-storybook
+
+      # For GitHub Actions
+      - name: Publish to Chromatic
+        if: ${{ !env.ACT }}
+        id: chromatic-deployment
+        uses: chromaui/action@latest
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          workingDir: apps/storybook
+          exitZeroOnChanges: true
+
+      - name: Notify Discord
+        if: success() && steps.chromatic-deployment.outputs.storybookUrl
+        uses: Ilshidur/action-discord@master
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        with:
+          args: |
+            🎨 New Storybook Deployment
+            📚 Storybook URL: ${{ steps.chromatic-deployment.outputs.storybookUrl }}
+            🔍 Build Details: ${{ steps.chromatic-deployment.outputs.buildUrl }}

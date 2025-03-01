@@ -1,0 +1,85 @@
+{
+  "name": "@theblairwitch/arcana-ui",
+  "version": "0.0.0",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public",
+    "scope": "@theblairwitch"
+  },
+  "description": "starter repo for publishing arcana libraries",
+  "private": false,
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "style": "./dist/styles/styles.css",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./styles/*": "./dist/styles/*",
+    "./styles": "./dist/styles/styles.css",
+    "./fonts": "./dist/fonts.css",
+    "./fonts/*": "./dist/fonts/*",
+    "./dist/*": "./dist/*",
+    "./tailwind.config": {
+      "types": "./dist/tailwind.config.d.ts",
+      "require": "./dist/tailwind.config.js",
+      "import": "./dist/tailwind.config.js"
+    },
+    "./components/*": {
+      "types": "./dist/components/*.d.ts",
+      "import": "./dist/components/*.js",
+      "require": "./dist/components/*.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/styles/styles.css -o ./dist/styles/styles.css",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate:index": "bun run scripts/generate-index.ts",
+    "typecheck": "tsc --noEmit",
+    "prebuild": "rm -rf dist && bun run typecheck",
+    "build": "NODE_ENV=production tsup",
+    "dev": "tsup --watch",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
+    "version": "bun run changeset version"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "class-variance-authority": "^0.7.0",
+    "esbuild-plugin-svgr": "^3.0.0",
+    "tailwindcss": "^3.4.14",
+    "ts-node": "^10.9.2",
+    "tsup": "^8.3.5"
+  },
+  "peerDependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "dependencies": {
+    "@theblairwitch/arcana-icons": "workspace:*",
+    "@radix-ui/react-accordion": "^1.2.2",
+    "@radix-ui/react-collapsible": "^1.1.2",
+    "@radix-ui/react-dialog": "^1.1.4",
+    "@radix-ui/react-dropdown-menu": "^2.1.4",
+    "@radix-ui/react-popover": "^1.1.2",
+    "@radix-ui/react-progress": "^1.1.1",
+    "@radix-ui/react-scroll-area": "^1.2.2",
+    "@radix-ui/react-slider": "^1.2.2",
+    "@radix-ui/react-switch": "^1.1.1",
+    "@radix-ui/react-tabs": "^1.1.1",
+    "@radix-ui/react-toast": "^1.2.4",
+    "@radix-ui/react-tooltip": "^1.1.4",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.5.4",
+    "tailwindcss-animate": "^1.0.7"
+  }
+}

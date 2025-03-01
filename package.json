@@ -1,0 +1,59 @@
+{
+  "name": "arcana",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@changesets/cli": "^2.27.10",
+    "@eslint/js": "^8.57.0",
+    "@types/bun": "latest",
+    "@typescript-eslint/eslint-plugin": "^7.1.0",
+    "@typescript-eslint/parser": "^7.1.0",
+    "eslint": "^9.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-prettier": "^5.1.3",
+    "eslint-plugin-react": "^7.33.2",
+    "globals": "^14.0.0",
+    "prettier": "^3.2.5",
+    "typescript": "~5.3.3"
+  },
+  "dependencies": {
+    "@actions/core": "^1.11.1",
+    "discord.js": "^14.16.3"
+  },
+  "resolutions": {
+    "@typescript-eslint/eslint-plugin": "^7.1.0",
+    "@typescript-eslint/parser": "^7.1.0",
+    "typescript": "~5.3.3"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "scripts": {
+    "dev:ui": "cd packages/ui && bun run dev",
+    "storybook": "cd apps/storybook && bun run storybook",
+    "dev": "bun run dev:ui & bun run storybook",
+    "build:storybook": "cd apps/storybook && bun run build",
+    "build:icons": "cd packages/icons && bun run build",
+    "build:ui": "cd packages/ui && bun run build",
+    "publish": "bun run build:icons && bun run pack:icons && bun run build:ui && bun run pack:ui && bun run changeset version && bun run changeset publish",
+    "pack:ui": "cd packages/ui && bun pm pack",
+    "pack:icons": "cd packages/icons && bun pm pack",
+    "clean": "rm -rf node_modules bun.lockb packages/*/node_modules packages/*/bun.lockb packages/*/dist apps/*/node_modules apps/*/bun.lockb apps/*/.cache apps/*/.turbo apps/storybook/storybook-static .turbo",
+    "lint": "eslint \"**/*.{ts,tsx}\" --cache",
+    "lint:fix": "eslint \"**/*.{ts,tsx}\" --cache --fix --quiet",
+    "format": "prettier --write \"**/*.{ts,tsx,json,md}\" --ignore-path .gitignore",
+    "format:check": "prettier --check \"**/*.{ts,tsx,json,md}\" --ignore-path .gitignore",
+    "generate:icons": "cd packages/icons && bun run generate",
+    "generate:index": "cd packages/ui && bun run generate:index",
+    "test:chromatic": "act push -W .github/workflows/chromatic.yml --secret-file .secrets --container-architecture linux/amd64 --bind",
+    "test:release": "act push -W .github/workflows/release.yml --secret-file .secrets --container-architecture linux/amd64 --privileged",
+    "chromatic": "bun run build:storybook && cd apps/storybook && bun run chromatic"
+  },
+  "private": "true",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ]
+}
